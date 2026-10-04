@@ -1,0 +1,32 @@
+_subdirectory: template
+
+project_name:
+  type: str
+  help: Nom du projet?
+
+project_description:
+  type: str
+  help: yfékoi ?
+
+is_lib:
+  type: bool
+  help: Lib ?
+  default: yes
+
+with_drogon:
+  type: bool
+  help: Use drogon ?
+  default: no
+  when: "{{ not is_lib }}"
+
+is_header_only:
+  type: bool
+  help: Header only lib ?
+  default: no
+  when: "{{ is_lib }}"
+
+lib_target:
+  type: str
+  help: lib target
+  default: "{{ project_name }}"
+  when: "{{ is_lib }}"

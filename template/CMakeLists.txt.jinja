@@ -1,0 +1,14 @@
+cmake_minimum_required(VERSION 3.23)
+
+project({{ project_name }})
+
+{%- if is_lib %}
+add_library({{ project_name }})
+{% else %}
+add_executable({{ project_name }})
+{% endif %}
+set_target_properties({{ project_name }} PROPERTIES LINKER_LANGUAGE CXX)
+
+{%- if not is_header_only %}
+add_subdirectory(src)
+{% endif %}

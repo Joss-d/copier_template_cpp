@@ -1,0 +1,13 @@
+{%- if not is_lib %}
+target_sources({{ project_name }}
+  PRIVATE
+    main.cpp
+)
+{% endif %}
+
+{%- if is_lib %}
+target_sources({{ project_name }}
+  PUBLIC
+    ${CMAKE_SOURCE_DIR}/include/{{ lib_target }}.h
+)
+{% endif %}

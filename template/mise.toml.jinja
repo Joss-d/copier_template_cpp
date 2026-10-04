@@ -1,0 +1,19 @@
+[settings]
+python.uv_venv_auto = "create|source"
+
+[tools]
+prek = "latest"
+conan = "latest"
+ninja = "latest"
+cmake = "latest"
+
+[env]
+{% raw %}
+CONAN_HOME = "{{ config_root }}/.conan2"
+{% endraw %}
+
+[hooks]
+postinstall = ["prek install -f", "prek install --hook-type commit-msg -f", "conan profile detect"]
+
+[tasks.build]
+run = ["conan install . -s 'build_type=Debug' --build=missing", "cmake --preset conan-debug", "cmake --build build/Debug"]
